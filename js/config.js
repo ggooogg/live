@@ -93,18 +93,14 @@ const API_SITES = {
     api: "https://ikzy9.com/api.php/provide/vod",
     name: "iKun资源",
   },
-  lzi: {
-    api: "https://cj.lziapi.com/api.php/provide/vod/",
-    name: "量子资源站",
-  },
-  mozhuazy: {
-    api: "https://mozhuazy.com/api.php/provide/vod/",
-    name: "魔爪短剧",
-  },
-  joyski: {
-    api: "https://www.joyski.com.cn/api.php/provide/vod/",
-    name: "墨子影视",
-  },
+  // lzi: {
+  //   api: "https://cj.lziapi.com/api.php/provide/vod/",
+  //   name: "量子资源站",
+  // },
+  // joyski: {
+  //   api: "https://www.joyski.com.cn/api.php/provide/vod/",
+  //   name: "墨子影视",
+  // },
   testSource: {
     api: "https://www.example.com/api.php/provide/vod",
     name: "空内容测试源",
