@@ -871,12 +871,15 @@ function renderEpisodes() {
         // 根据倒序状态计算真实的剧集索引
         const realIndex = episodesReversed ? currentEpisodes.length - 1 - index : index;
         const isActive = realIndex === currentEpisodeIndex;
+        
+        // 检查episode是对象还是字符串
+        const epName = typeof episode === 'object' && episode.name ? episode.name : (realIndex + 1);
 
         html += `
             <button id="episode-${realIndex}" 
                     onclick="playEpisode(${realIndex})" 
                     class="px-4 py-2 ${isActive ? 'episode-active' : '!bg-[#222] hover:!bg-[#333] hover:!shadow-none'} !border ${isActive ? '!border-blue-500' : '!border-[#333]'} rounded-lg transition-colors text-center episode-btn">
-                ${realIndex + 1}
+                ${epName}
             </button>
         `;
     });
@@ -916,7 +919,8 @@ function playEpisode(index) {
     const sourceCode = urlParams2.get('source_code');
 
     // 准备切换剧集的URL
-    const url = currentEpisodes[index];
+    const episode = currentEpisodes[index];
+    const url = typeof episode === 'object' && episode.url ? episode.url : episode;
 
     // 更新当前剧集索引
     currentEpisodeIndex = index;

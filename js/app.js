@@ -1091,19 +1091,39 @@ function handlePlayerError() {
     showToast('视频播放加载失败，请尝试其他视频源', 'error');
 }
 
+// 从data属性获取参数并调用playVideo函数
+function playVideoFromData(button) {
+    const url = button.getAttribute('data-url');
+    const vodName = button.getAttribute('data-vodname');
+    const sourceCode = button.getAttribute('data-sourcecode');
+    const index = parseInt(button.getAttribute('data-index'));
+    const vodId = button.getAttribute('data-vodid');
+    
+    playVideo(url, vodName, sourceCode, index, vodId);
+}
+
 // 辅助函数用于渲染剧集按钮（使用当前的排序状态）
 function renderEpisodes(vodName, sourceCode, vodId) {
-    const episodes = episodesReversed ? [...currentEpisodes].reverse() : currentEpisodes;
-    return episodes.map((episode, index) => {
-        // 根据倒序状态计算真实的剧集索引
-        const realIndex = episodesReversed ? currentEpisodes.length - 1 - index : index;
-        return `
-            <button id="episode-${realIndex}" onclick="playVideo('${episode}','${vodName.replace(/"/g, '&quot;')}', '${sourceCode}', ${realIndex}, '${vodId}')" 
+  const episodes = episodesReversed
+    ? [...currentEpisodes].reverse()
+    : currentEpisodes;
+  return episodes
+    .map((episode, index) => {
+      // 根据倒序状态计算真实的剧集索引
+      const realIndex = episodesReversed
+        ? currentEpisodes.length - 1 - index
+        : index;
+      // 检查episode是对象还是字符串
+      const epName = typeof episode === 'object' && episode.name ? episode.name : (realIndex + 1);
+      const epUrl = typeof episode === 'object' && episode.url ? episode.url : episode;
+      // 简单的方法：使用双引号包裹属性值，避免单引号转义问题
+      return `
+            <button id="episode-${realIndex}" data-url="${epUrl}" data-vodname="${vodName}" data-sourcecode="${sourceCode}" data-index="${realIndex}" data-vodid="${vodId}" onclick="playVideoFromData(this)" 
                     class="px-4 py-2 bg-[#222] hover:bg-[#333] border border-[#333] rounded-lg transition-colors text-center episode-btn">
-                ${realIndex + 1}
-            </button>
-        `;
-    }).join('');
+                ${epName}
+            </button>`;
+    })
+    .join('');
 }
 
 // 复制视频链接到剪贴板

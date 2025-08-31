@@ -152,24 +152,58 @@ async function handleApiRequest(url) {
                     // 分割不同播放源
                     const playSources = videoDetail.vod_play_url.split('$$$');
                     
-                    // 提取第一个播放源的集数（通常为主要源）
-                    if (playSources.length > 0) {
-                        const mainSource = playSources[0];
-                        const episodeList = mainSource.split('#');
+                    // 优先处理包含.m3u8的播放源（通常是$$$分隔后的源）
+                    let hasM3u8Sources = false;
+                    
+                    // 第一次遍历：只收集.m3u8链接，并保存集数名称
+                    for (const source of playSources) {
+                        const episodeList = source.split('#');
                         
-                        // 从每个集数中提取URL
-                        episodes = episodeList.map(ep => {
+                        const m3u8Episodes = episodeList.map(ep => {
                             const parts = ep.split('$');
-                            // 返回URL部分(通常是第二部分，如果有的话)
-                            return parts.length > 1 ? parts[1] : '';
-                        }).filter(url => url && (url.startsWith('http://') || url.startsWith('https://')));
+                            // 返回包含名称和URL的对象
+                            return parts.length > 1 ? {
+                                name: parts[0].trim() || `第${episodes.length + 1}集`,
+                                url: parts[1]
+                            } : null;
+                        }).filter(item => item && 
+                            (item.url.startsWith('http://') || item.url.startsWith('https://')) && 
+                            item.url.endsWith('.m3u8'));
+                        
+                        if (m3u8Episodes.length > 0) {
+                            episodes = [...episodes, ...m3u8Episodes];
+                            hasM3u8Sources = true;
+                        }
+                    }
+                    
+                    // 如果没有找到.m3u8链接，则尝试处理所有链接（兼容旧格式）
+                    if (!hasM3u8Sources) {
+                        for (const source of playSources) {
+                            const episodeList = source.split('#');
+                            
+                            const allEpisodes = episodeList.map(ep => {
+                                const parts = ep.split('$');
+                                // 返回包含名称和URL的对象
+                                return parts.length > 1 ? {
+                                    name: parts[0].trim() || `第${episodes.length + 1}集`,
+                                    url: parts[1]
+                                } : null;
+                            }).filter(item => item && 
+                                (item.url.startsWith('http://') || item.url.startsWith('https://')));
+                            
+                            episodes = [...episodes, ...allEpisodes];
+                        }
                     }
                 }
                 
                 // 如果没有找到播放地址，尝试使用正则表达式查找m3u8链接
                 if (episodes.length === 0 && videoDetail.vod_content) {
                     const matches = videoDetail.vod_content.match(M3U8_PATTERN) || [];
-                    episodes = matches.map(link => link.replace(/^\$/, ''));
+                    // 对于正则匹配到的链接，创建带默认名称的对象
+                    episodes = matches.map((link, index) => ({
+                        name: `第${index + 1}集`,
+                        url: link.replace(/^\$/, '')
+                    }));
                 }
                 
                 return JSON.stringify({
