@@ -118,10 +118,6 @@ const API_SITES = {
     api: "https://api.ukuapi88.com/api.php/provide/vod",
     name: "U酷资源",
   },
-  lziapi: {
-    api: "https://cj.lziapi.com/api.php/provide/vod",
-    name: "lzi资源",
-  },
   ikzy6: {
     api: "https://ikzy6.com/api.php/provide/vod",
     name: "ikun资源",
