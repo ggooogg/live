@@ -361,15 +361,15 @@ export default async function handler(req, res) {
     try { // ---- 开始主处理逻辑的 try 块 ----
 
         // --- 验证鉴权 ---
-        const isAuthorized = await validateAuth(req);
-        if (!isAuthorized) {
-            console.warn('代理请求鉴权失败');
-            res.status(401).json({
-                success: false,
-                error: '代理访问未授权：请检查密码配置或鉴权参数'
-            });
-            return;
-        }
+        // const isAuthorized = await validateAuth(req);
+        // if (!isAuthorized) {
+        //     console.warn('代理请求鉴权失败');
+        //     res.status(401).json({
+        //         success: false,
+        //         error: '代理访问未授权：请检查密码配置或鉴权参数'
+        //     });
+        //     return;
+        // }
 
         // --- 提取目标 URL (主要依赖 req.query["...path"]) ---
         // Vercel 将 :path* 捕获的内容（可能包含斜杠）放入 req.query["...path"] 数组

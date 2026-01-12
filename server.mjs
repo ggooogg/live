@@ -155,12 +155,12 @@ function validateProxyAuth(req) {
 app.get('/proxy/:encodedUrl', async (req, res) => {
   try {
     // 验证鉴权
-    if (!validateProxyAuth(req)) {
-      return res.status(401).json({
-        success: false,
-        error: '代理访问未授权：请检查密码配置或鉴权参数'
-      });
-    }
+    // if (!validateProxyAuth(req)) {
+    //   return res.status(401).json({
+    //     success: false,
+    //     error: '代理访问未授权：请检查密码配置或鉴权参数'
+    //   });
+    // }
 
     const encodedUrl = req.params.encodedUrl;
     const targetUrl = decodeURIComponent(encodedUrl);
@@ -184,7 +184,8 @@ app.get('/proxy/:encodedUrl', async (req, res) => {
           responseType: 'stream',
           timeout: config.timeout,
           headers: {
-            'User-Agent': config.userAgent
+            'User-Agent': config.userAgent,
+            'Referer': 'https://movie.douban.com/',
           }
         });
       } catch (error) {
