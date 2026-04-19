@@ -1103,7 +1103,8 @@ function saveToHistory() {
     if (sourceName && id_from_params) {
         show_identifier_for_video_info = `${sourceName}_${id_from_params}`;
     } else {
-        show_identifier_for_video_info = (currentEpisodes && currentEpisodes.length > 0) ? currentEpisodes[0] : currentVideoUrl;
+        const firstEp = currentEpisodes && currentEpisodes.length > 0 ? currentEpisodes[0] : null;
+        show_identifier_for_video_info = firstEp ? (typeof firstEp === 'object' && firstEp.url ? firstEp.url : firstEp) : currentVideoUrl;
     }
 
     // 构建要保存的视频信息对象
@@ -1768,8 +1769,9 @@ async function switchToResource(sourceKey, vodId) {
             targetIndex = currentIndex;
         }
         
-        // 获取目标集数的URL
-        const targetUrl = data.episodes[targetIndex];
+        // 获取目标集数的URL（兼容对象或字符串格式）
+        const targetEpisode = data.episodes[targetIndex];
+        const targetUrl = typeof targetEpisode === 'object' && targetEpisode.url ? targetEpisode.url : targetEpisode;
         
         // 构建播放页面URL
         const watchUrl = `player.html?id=${vodId}&source=${sourceKey}&url=${encodeURIComponent(targetUrl)}&index=${targetIndex}&title=${encodeURIComponent(currentVideoTitle)}`;

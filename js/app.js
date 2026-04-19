@@ -1071,7 +1071,8 @@ function closeVideoPlayer(home = false) {
 function playPreviousEpisode(sourceCode) {
     if (currentEpisodeIndex > 0) {
         const prevIndex = currentEpisodeIndex - 1;
-        const prevUrl = currentEpisodes[prevIndex];
+        const prevEp = currentEpisodes[prevIndex];
+        const prevUrl = typeof prevEp === 'object' && prevEp.url ? prevEp.url : prevEp;
         playVideo(prevUrl, currentVideoTitle, sourceCode, prevIndex);
     }
 }
@@ -1080,7 +1081,8 @@ function playPreviousEpisode(sourceCode) {
 function playNextEpisode(sourceCode) {
     if (currentEpisodeIndex < currentEpisodes.length - 1) {
         const nextIndex = currentEpisodeIndex + 1;
-        const nextUrl = currentEpisodes[nextIndex];
+        const nextEp = currentEpisodes[nextIndex];
+        const nextUrl = typeof nextEp === 'object' && nextEp.url ? nextEp.url : nextEp;
         playVideo(nextUrl, currentVideoTitle, sourceCode, nextIndex);
     }
 }
