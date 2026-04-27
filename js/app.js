@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 设置默认API选择（如果是第一次加载）
     if (!localStorage.getItem('hasInitializedDefaults')) {
         // 默认选中资源
-        selectedAPIs = ["lziapi", "zy360", "ukuapi88", "dbzy", "ikzy6"];
+        selectedAPIs = [...Array(20).keys()].map(String); // 默认选中前22个API
         localStorage.setItem('selectedAPIs', JSON.stringify(selectedAPIs));
 
         // 默认选中过滤开关
@@ -642,7 +642,7 @@ async function search() {
 
         // 从所有选中的API源搜索
         let allResults = [];
-        const searchPromises = selectedAPIs.map(apiId => 
+        const searchPromises = selectedAPIs.map(apiId =>
             searchByAPIAndKeyWord(apiId, query)
         );
 
@@ -661,7 +661,7 @@ async function search() {
             // 首先按照视频名称排序
             const nameCompare = (a.vod_name || '').localeCompare(b.vod_name || '');
             if (nameCompare !== 0) return nameCompare;
-            
+
             // 如果名称相同，则按照来源排序
             return (a.source_name || '').localeCompare(b.source_name || '');
         });
@@ -1100,32 +1100,32 @@ function playVideoFromData(button) {
     const sourceCode = button.getAttribute('data-sourcecode');
     const index = parseInt(button.getAttribute('data-index'));
     const vodId = button.getAttribute('data-vodid');
-    
+
     playVideo(url, vodName, sourceCode, index, vodId);
 }
 
 // 辅助函数用于渲染剧集按钮（使用当前的排序状态）
 function renderEpisodes(vodName, sourceCode, vodId) {
-  const episodes = episodesReversed
-    ? [...currentEpisodes].reverse()
-    : currentEpisodes;
-  return episodes
-    .map((episode, index) => {
-      // 根据倒序状态计算真实的剧集索引
-      const realIndex = episodesReversed
-        ? currentEpisodes.length - 1 - index
-        : index;
-      // 检查episode是对象还是字符串
-      const epName = typeof episode === 'object' && episode.name ? episode.name : (realIndex + 1);
-      const epUrl = typeof episode === 'object' && episode.url ? episode.url : episode;
-      // 简单的方法：使用双引号包裹属性值，避免单引号转义问题
-      return `
+    const episodes = episodesReversed
+        ? [...currentEpisodes].reverse()
+        : currentEpisodes;
+    return episodes
+        .map((episode, index) => {
+            // 根据倒序状态计算真实的剧集索引
+            const realIndex = episodesReversed
+                ? currentEpisodes.length - 1 - index
+                : index;
+            // 检查episode是对象还是字符串
+            const epName = typeof episode === 'object' && episode.name ? episode.name : (realIndex + 1);
+            const epUrl = typeof episode === 'object' && episode.url ? episode.url : episode;
+            // 简单的方法：使用双引号包裹属性值，避免单引号转义问题
+            return `
             <button id="episode-${realIndex}" data-url="${epUrl}" data-vodname="${vodName}" data-sourcecode="${sourceCode}" data-index="${realIndex}" data-vodid="${vodId}" onclick="playVideoFromData(this)" 
                     class="px-4 py-2 bg-[#222] hover:bg-[#333] border border-[#333] rounded-lg transition-colors text-center episode-btn">
                 ${epName}
             </button>`;
-    })
-    .join('');
+        })
+        .join('');
 }
 
 // 复制视频链接到剪贴板

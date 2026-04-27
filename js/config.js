@@ -22,111 +22,86 @@ const SITE_CONFIG = {
 
 // API站点配置
 const API_SITES = {
-  zuidapi: {
-    api: "https://api.zuidapi.com/api.php/provide/vod",
-    name: "最大资源",
+  "0": {
+    "api": "https://iqiyizyapi.com/api.php/provide/vod",
+    "name": "TV-爱奇艺"
   },
-  wujinapi: {
-    api: "https://api.wujinapi.com/api.php/provide/vod",
-    name: "无尽资源",
+  "1": {
+    "api": "https://caiji.dbzy5.com/api.php/provide/vod",
+    "name": "TV-豆瓣资源"
   },
-  wolongzy: {
-    api: "https://collect.wolongzy.cc/api.php/provide/vod",
-    name: "卧龙资源站",
+  "2": {
+    "api": "http://caiji.dyttzyapi.com/api.php/provide/vod",
+    "name": "TV-电影天堂"
   },
-  wwzy: {
-    api: "https://wwzy.tv/api.php/provide/vod",
-    name: "旺旺短剧",
+  "3": {
+    "api": "https://caiji.maotaizy.cc/api.php/provide/vod",
+    "name": "TV-茅台资源"
   },
-  subocaiji: {
-    api: "https://subocaiji.com/api.php/provide/vod",
-    name: "速播资源",
+  "4": {
+    "api": "https://cj.lziapi.com/api.php/provide/vod",
+    "name": "TV-量子资源"
   },
-  ruyi: {
-    api: "https://cj.rycjapi.com/api.php/provide/vod",
-    name: "如意资源",
+  "5": {
+    "api": "https://api.maoyanapi.top/api.php/provide/vod",
+    "name": "TV-猫眼资源"
   },
-  pbpan: {
-    api: "https://www.pbpan.com/api.php/provide/vod",
-    name: "瀑布盘短剧",
+  "6": {
+    "api": "https://cj.rycjapi.com/api.php/provide/vod",
+    "name": "TV-如意资源"
   },
-  joyski: {
-    api: "https://www.joyski.com.cn/api.php/provide/vod",
-    name: "墨子影视",
+  "7": {
+    "api": "https://collect.wolongzyw.com/api.php/provide/vod",
+    "name": "TV-卧龙资源"
   },
-  mozhuazy: {
-    api: "https://mozhuazy.com/api.php/provide/vod",
-    name: "魔爪资源",
+  "8": {
+    "api": "https://360zy.com/api.php/provide/vod",
+    "name": "TV-360资源"
   },
-  mdzyapi: {
-    api: "https://www.mdzyapi.com/api.php/provide/vod",
-    name: "魔都资源",
+  "9": {
+    "api": "https://jszyapi.com/api.php/provide/vod",
+    "name": "TV-极速资源"
   },
-  maoyanzy: {
-    api: "https://www.maoyanzy.cc/api.php/provide/vod",
-    name: "猫眼资源",
+  "10": {
+    "api": "https://cj.ffzyapi.com/api.php/provide/vod",
+    "name": "TV-非凡影视"
   },
-  lziapi: {
-    api: "https://cj.lziapi.com/api.php/provide/vod",
-    name: "量子资源",
+  "11": {
+    "api": "https://api.ffzyapi.com/api.php/provide/vod",
+    "name": "TV-非凡资源"
   },
-  jyzyapi: {
-    api: "https://jyzyapi.com/api.php/provide/vod",
-    name: "金鹰资源",
+  "12": {
+    "api": "https://bfzyapi.com/api.php/provide/vod",
+    "name": "TV-暴风资源"
   },
-  jszyapi: {
-    api: "https://jszyapi.com/api.php/provide/vod",
-    name: "极速资源",
+  "13": {
+    "api": "https://api.zuidapi.com/api.php/provide/vod",
+    "name": "TV-最大资源"
   },
-  hongniuzy3: {
-    api: "https://www.hongniuzy3.com/api.php/provide/vod",
-    name: "红牛资源",
+  "14": {
+    "api": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
+    "name": "TV-新浪资源"
   },
-  hhzyapi: {
-    api: "https://hhzyapi.com/api.php/provide/vod",
-    name: "豪华资源",
+  "15": {
+    "api": "https://api.wwzy.tv/api.php/provide/vod",
+    "name": "TV-旺旺资源"
   },
-  guangsuapi: {
-    api: "https://api.guangsuapi.com/api.php/provide/vod",
-    name: "光速资源",
+  "16": {
+    "api": "https://subocaiji.com/api.php/provide/vod",
+    "name": "TV-速播资源"
   },
-  ffzy5: {
-    api: "http://ffzy5.tv/api.php/provide/vod",
-    name: "非凡资源",
+  "17": {
+    "api": "https://www.huyaapi.com/api.php/provide/vod",
+    "name": "TV-虎牙资源"
   },
-  dbzy: {
-    api: "https://dbzy.tv/api.php/provide/vod",
-    name: "豆瓣资源",
+  "18": {
+    "api": "https://jyzyapi.com/provide/vod/from/jinyingyun/at/json",
+    "name": "TV-金鹰资源"
   },
-  dyttzyapi: {
-    api: "https://caiji.dyttzyapi.com/api.php/provide/vod",
-    name: "电影天堂",
-  },
-  bfzyapi: {
-    api: "https://bfzyapi.com/api.php/provide/vod",
-    name: "暴风资源",
-  },
-  apibdzy: {
-    api: "https://api.apibdzy.com/api.php/provide/vod",
-    name: "百度资源",
-  },
-  iqiyizy7: {
-    api: "https://iqiyizy7.com/api.php/provide/vod",
-    name: "爱奇艺",
-  },
-  ukuapi88: {
-    api: "https://api.ukuapi88.com/api.php/provide/vod",
-    name: "U酷资源",
-  },
-  ikzy6: {
-    api: "https://ikzy6.com/api.php/provide/vod",
-    name: "ikun资源",
-  },
-  zy360: {
-    api: "https://360zy6.com/api.php/provide/vod",
-    name: "360资源1",
-  },
-  //ARCHIVE https://telegra.ph/APIs-08-12
+  "19": {
+    "api": "https://p2100.net/api.php/provide/vod",
+    "name": "TV-飘零资源"
+  }
 };
 
 // 定义合并方法
@@ -156,8 +131,10 @@ const API_CONFIG = {
     maxPages: 50, // 最大获取页数
     headers: {
       "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-      Accept: "application/json",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+      "Accept-Language": "zh-CN,zh;q=0.9",
+      "Connection": "close",
+      "Upgrade-Insecure-Requests": "1"
     },
   },
   detail: {
@@ -165,8 +142,10 @@ const API_CONFIG = {
     path: "?ac=videolist&ids=",
     headers: {
       "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-      Accept: "application/json",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+      "Accept-Language": "zh-CN,zh;q=0.9",
+      "Connection": "close",
+      "Upgrade-Insecure-Requests": "1"
     },
   },
 };
